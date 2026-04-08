@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Burger King | Taste is Never Second Best</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        bkred: '#D62300',
+        bkyellow: '#F5A623',
+        bkbrown: '#502314',
+        bkdark: '#1a0a04'
+      },
+      fontFamily: { sans: ['Nunito', 'sans-serif'] }
+    }
+  }
+}
+</script>
+<style>
+  .text-shadow { text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+  .scroll-reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out; }
+  .scroll-reveal.visible { opacity: 1; transform: translateY(0); }
+  .stagger-1 { transition-delay: 100ms; }
+  .stagger-2 { transition-delay: 200ms; }
+  .stagger-3 { transition-delay: 300ms; }
+  .timer-pulse { animation: softPulse 1s infinite; }
+  @keyframes softPulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
+  .fade-content { animation: fadeInOut 0.4s ease-in-out; }
+  @keyframes fadeInOut { 0%{opacity:0;transform:scale(0.98)} 100%{opacity:1;transform:scale(1)} }
+</style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-900 antialiased overflow-x-hidden">
+
+<!-- PROMO BANNER -->
+<div id="promo-banner" class="bg-red-700 text-white py-2 px-4 flex justify-center items-center relative z-50 transition-all duration-300">
+  <p class="text-sm md:text-base font-bold text-center">
+    🔥 FREE Whopper with $15+ order — Use code <span class="text-yellow-400 text-lg">FLAME15</span> at checkout
+  </p>
+  <button id="close-banner" class="absolute right-4 text-white hover:text-yellow-400 font-bold text-xl transition-colors duration-200">&times;</button>
+</div>
+
+<!-- NAV -->
+<nav id="navbar" class="fixed w-full z-40 transition-all duration-300 bg-transparent py-4">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+    <a href="#" class="flex flex-col leading-none drop-shadow-md hover:scale-105 transition-transform duration-200">
+      <span class="font-black text-2xl tracking-tighter text-red-600">BURGER</span>
+      <span class="font-black text-2xl tracking-tighter text-yellow-400">KING</span>
+    </a>
+    <div class="hidden md:flex items-center space-x-8">
+      <a href="#menu" class="text-white font-bold hover:text-yellow-400 transition-colors duration-200 text-lg drop-shadow-md">Menu</a>
+      <a href="#deals" class="text-white font-bold hover:text-yellow-400 transition-colors duration-200 text-lg drop-shadow-md">Deals</a>
+      <a href="#locator" class="text-white font-bold hover:text-yellow-400 transition-colors duration-200 text-lg drop-shadow-md">Find a BK</a>
+      <a href="#menu" class="bg-yellow-400 text-yellow-900 font-black px-6 py-2 rounded-full hover:bg-yellow-300 hover:scale-105 transition-all duration-200 shadow-lg">Order Now</a>
+    </div>
+    <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-yellow-900 shadow-xl flex flex-col items-center py-6 space-y-6 md:hidden border-t border-white/10">
+    <a href="#menu" class="text-white font-bold text-xl mobile-link">Menu</a>
+    <a href="#deals" class="text-white font-bold text-xl mobile-link">Deals</a>
+    <a href="#locator" class="text-white font-bold text-xl mobile-link">Find a BK</a>
+    <a href="#menu" class="bg-yellow-400 text-yellow-900 font-black px-8 py-3 rounded-full text-xl w-3/4 text-center mobile-link">Order Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+  <div class="absolute inset-0" style="background-image:url('https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&q=80&w=2000');background-size:cover;background-position:center"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
+  <div class="relative z-10 text-center px-4 max-w-5xl mx-auto mt-16 scroll-reveal">
+    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-4 tracking-tight leading-tight text-shadow">
+      Taste is Never <br class="hidden md:block"/>Second Best.
+    </h1>
+    <p class="text-xl md:text-3xl text-white font-bold mb-10 drop-shadow-lg">Flame-grilled. Not fried. Never ordinary.</p>
+    <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+      <a href="#menu" class="w-full sm:w-auto bg-yellow-400 text-yellow-900 font-black text-xl px-10 py-4 rounded-full hover:bg-yellow-300 hover:scale-105 transition-all duration-200 shadow-lg">Order Now</a>
+      <a href="#menu" class="w-full sm:w-auto bg-transparent border-2 border-white text-white font-bold text-xl px-10 py-4 rounded-full hover:bg-white hover:text-black hover:scale-105 transition-all duration-200">See the Menu</a>
+    </div>
+  </div>
+  <div class="absolute bottom-8 left-4 md:left-8 z-10 animate-bounce">
+    <div class="bg-red-700 text-white px-4 py-2 rounded-lg font-black shadow-lg border-2 border-white transform -rotate-3 hover:rotate-0 transition-transform cursor-default">
+      🔥 Whopper Wednesday — 2 for $9
+    </div>
+  </div>
+</section>
+
+<!-- DEAL -->
+<section id="deals" class="bg-red-700 py-16 md:py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col lg:flex-row items-center gap-12 bg-black/20 rounded-3xl p-6 md:p-12 border border-white/10 shadow-2xl scroll-reveal">
+      <div class="w-full lg:w-1/2 rounded-2xl overflow-hidden shadow-2xl group cursor-pointer">
+        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=800" alt="Two Whoppers" class="w-full h-64 md:h-96 object-cover group-hover:scale-110 transition-transform duration-500">
+      </div>
+      <div class="w-full lg:w-1/2 text-white">
+        <span class="inline-block bg-yellow-400 text-yellow-900 font-black px-4 py-1 rounded-full text-sm mb-4 tracking-wider uppercase">Limited Time</span>
+        <h2 class="text-4xl md:text-5xl font-black mb-4 leading-tight">2 Whoppers.<br>1 Price.<br>Zero Regrets.</h2>
+        <div class="text-6xl font-black text-yellow-400 mb-8">$9.99</div>
+        <div class="mb-8">
+          <p class="text-sm font-bold uppercase tracking-widest mb-2 opacity-80">Deal ends at midnight:</p>
+          <div class="flex gap-4 text-center">
+            <div class="bg-black/40 rounded-lg p-3 w-20">
+              <div id="t-hours" class="text-3xl font-black text-white timer-pulse">00</div>
+              <div class="text-xs uppercase font-bold text-gray-400">Hours</div>
+            </div>
+            <div class="text-3xl font-black pt-2 opacity-50">:</div>
+            <div class="bg-black/40 rounded-lg p-3 w-20">
+              <div id="t-minutes" class="text-3xl font-black text-white timer-pulse">00</div>
+              <div class="text-xs uppercase font-bold text-gray-400">Mins</div>
+            </div>
+            <div class="text-3xl font-black pt-2 opacity-50">:</div>
+            <div class="bg-black/40 rounded-lg p-3 w-20">
+              <div id="t-seconds" class="text-3xl font-black text-yellow-400 timer-pulse">00</div>
+              <div class="text-xs uppercase font-bold text-gray-400">Secs</div>
+            </div>
+          </div>
+        </div>
+        <button class="w-full bg-yellow-400 text-yellow-900 font-black text-xl py-4 rounded-full hover:bg-yellow-300 hover:scale-105 transition-all duration-200 shadow-xl flex items-center justify-center gap-2 group">
+          Claim This Deal <span class="group-hover:translate-x-2 transition-transform">→</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu" class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-4xl md:text-5xl font-black text-yellow-900 text-center mb-10 scroll-reveal">Built Different. Every Time.</h2>
+    <div class="flex overflow-x-auto pb-4 justify-start md:justify-center gap-2 md:gap-6 mb-12 scroll-reveal stagger-1">
+      <button class="menu-tab active font-bold text-lg px-6 py-2 border-b-4 border-yellow-400 text-yellow-900 whitespace-nowrap" data-category="all">All</button>
+      <button class="menu-tab font-bold text-lg px-6 py-2 border-b-4 border-transparent text-gray-500 hover:text-yellow-900 whitespace-nowrap" data-category="burgers">Burgers</button>
+      <button class="menu-tab font-bold text-lg px-6 py-2 border-b-4 border-transparent text-gray-500 hover:text-yellow-900 whitespace-nowrap" data-category="chicken">Chicken</button>
+      <button class="menu-tab font-bold text-lg px-6 py-2 border-b-4 border-transparent text-gray-500 hover:text-yellow-900 whitespace-nowrap" data-category="sides">Sides</button>
+      <button class="menu-tab font-bold text-lg px-6 py-2 border-b-4 border-transparent text-gray-500 hover:text-yellow-900 whitespace-nowrap" data-category="drinks">Drinks</button>
+      <button class="menu-tab font-bold text-lg px-6 py-2 border-b-4 border-transparent text-gray-500 hover:text-yellow-900 whitespace-nowrap" data-category="desserts">Desserts</button>
+    </div>
+    <div id="menu-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 group scroll-reveal stagger-1">
+        <div class="h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1586816001966-79b736744398?auto=format&fit=crop&w=600" alt="Whopper" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div>
+        <div class="p-6">
+          <div class="flex justify-between items-start mb-2"><h3 class="text-2xl font-black text-yellow-900">The Whopper</h3><span class="text-xl font-bold text-red-600">$6.49</span></div>
+          <p class="text-gray-600 font-semibold mb-6">1/4 lb of savory flame-grilled beef topped with juicy tomatoes.</p>
+          <button class="w-full bg-yellow-400 text-yellow-900 font-black py-3 rounded-full hover:bg-yellow-900 hover:text-white transition-colors duration-200">Add to Order</button>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 group scroll-reveal stagger-2">
+        <div class="h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=600" alt="Crispy Chicken" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div>
+        <div class="p-6">
+          <div class="flex justify-between items-start mb-2"><h3 class="text-2xl font-black text-yellow-900">Ch'King Sandwich</h3><span class="text-xl font-bold text-red-600">$5.99</span></div>
+          <p class="text-gray-600 font-semibold mb-6">Hand-breaded crispy chicken filet with savory signature sauce.</p>
+          <button class="w-full bg-yellow-400 text-yellow-900 font-black py-3 rounded-full hover:bg-yellow-900 hover:text-white transition-colors duration-200">Add to Order</button>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 group scroll-reveal stagger-3">
+        <div class="h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=600" alt="Fries" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div>
+        <div class="p-6">
+          <div class="flex justify-between items-start mb-2"><h3 class="text-2xl font-black text-yellow-900">Classic Fries</h3><span class="text-xl font-bold text-red-600">$2.99</span></div>
+          <p class="text-gray-600 font-semibold mb-6">Piping hot and perfectly salted. The ultimate side.</p>
+          <button class="w-full bg-yellow-400 text-yellow-900 font-black py-3 rounded-full hover:bg-yellow-900 hover:text-white transition-colors duration-200">Add to Order</button>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 group scroll-reveal stagger-1">
+        <div class="h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1562967914-608f82629710?auto=format&fit=crop&w=600" alt="Nuggets" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div>
+        <div class="p-6">
+          <div class="flex justify-between items-start mb-2"><h3 class="text-2xl font-black text-yellow-900">10 Pc. Nuggets</h3><span class="text-xl font-bold text-red-600">$3.49</span></div>
+          <p class="text-gray-600 font-semibold mb-6">Bite-sized white meat chicken, crispy and golden outside.</p>
+          <button class="w-full bg-yellow-400 text-yellow-900 font-black py-3 rounded-full hover:bg-yellow-900 hover:text-white transition-colors duration-200">Add to Order</button>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 group scroll-reveal stagger-2">
+        <div class="h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=600" alt="Drink" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div>
+        <div class="p-6">
+          <div class="flex justify-between items-start mb-2"><h3 class="text-2xl font-black text-yellow-900">Soft Drink</h3><span class="text-xl font-bold text-red-600">$2.29</span></div>
+          <p class="text-gray-600 font-semibold mb-6">Ice-cold refreshment to pair with your perfect meal.</p>
+          <button class="w-full bg-yellow-400 text-yellow-900 font-black py-3 rounded-full hover:bg-yellow-900 hover:text-white transition-colors duration-200">Add to Order</button>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 group scroll-reveal stagger-3">
+        <div class="h-64 overflow-hidden"><img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=600" alt="Dessert" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"></div>
+        <div class="p-6">
+          <div class="flex justify-between items-start mb-2"><h3 class="text-2xl font-black text-yellow-900">Hershey's Pie</h3><span class="text-xl font-bold text-red-600">$2.49</span></div>
+          <p class="text-gray-600 font-semibold mb-6">Crunchy chocolate crust with a creamy chocolate filling.</p>
+          <button class="w-full bg-yellow-400 text-yellow-900 font-black py-3 rounded-full hover:bg-yellow-900 hover:text-white transition-colors duration-200">Add to Order</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APP CTA -->
+<section class="bg-gradient-to-r from-yellow-900 to-black text-white overflow-hidden">
+  <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center">
+    <div class="w-full lg:w-1/2 pt-16 lg:pt-0 px-4 flex justify-center scroll-reveal">
+      <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=600&h=800" alt="Mobile App" class="w-64 md:w-80 rounded-t-3xl shadow-2xl border-x-8 border-t-8 border-gray-800 hover:-translate-y-4 transition-transform duration-500">
+    </div>
+    <div class="w-full lg:w-1/2 py-16 px-6 lg:px-12 scroll-reveal stagger-1">
+      <h2 class="text-4xl md:text-5xl font-black mb-4">Skip the Line.<br>Rule the Flame.</h2>
+      <p class="text-xl font-bold text-gray-300 mb-8">Download the BK app and unlock exclusive deals only members get.</p>
+      <ul class="space-y-4 mb-10 text-lg font-bold">
+        <li class="flex items-center gap-3"><span class="text-2xl">🔥</span> Earn crowns on every order</li>
+        <li class="flex items-center gap-3"><span class="text-2xl">👑</span> Members-only prices</li>
+        <li class="flex items-center gap-3"><span class="text-2xl">🎁</span> Free item on your first app order</li>
+      </ul>
+      <div class="flex flex-col sm:flex-row gap-4">
+        <button class="bg-black text-white border border-gray-700 px-6 py-3 rounded-full flex items-center justify-center gap-3 hover:bg-gray-900 hover:scale-105 transition-all shadow-lg">
+          <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24"><path d="M16.36 14.36c-.02-2.71 2.22-4.02 2.32-4.08-1.26-1.84-3.23-2.09-3.92-2.12-1.68-.17-3.29.99-4.15.99-.86 0-2.18-1.02-3.58-.99-1.82.02-3.49 1.06-4.43 2.69-1.9 3.29-.48 8.16 1.38 10.84.9 1.29 1.95 2.74 3.35 2.69 1.34-.05 1.86-.86 3.49-.86 1.62 0 2.1.86 3.51.84 1.43-.02 2.34-1.32 3.24-2.62 1.03-1.5 1.45-2.95 1.47-3.03-.02-.01-2.65-1.01-2.68-3.75zM14.93 6.94c.75-.91 1.25-2.17 1.11-3.44-1.08.04-2.43.72-3.19 1.62-.68.81-1.28 2.1-1.12 3.35 1.2.09 2.45-.63 3.2-1.53z"/></svg>
+          <div class="text-left leading-none"><div class="text-xs font-semibold">Download on the</div><div class="text-lg font-black">App Store</div></div>
+        </button>
+        <button class="bg-black text-white border border-gray-700 px-6 py-3 rounded-full flex items-center justify-center gap-3 hover:bg-gray-900 hover:scale-105 transition-all shadow-lg">
+          <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none"><path d="M3.6 3.2l12 11.2L11 17l-7.4-13.8z" fill="#00f0ff"/><path d="M15.6 14.4l4.8 4.4c1 1 .6 2-.8 2l-15.2.4L11 17l4.6-2.6z" fill="#ff004d"/><path d="M3.6 3.2L11 17l8.4-4.8c1.2-.6 1.4-1.8.4-2.8L3.6 3.2z" fill="#00ff00"/><path d="M4.4 21.2L3.6 3.2l12 11.2-11.2 6.8z" fill="#ffeb00"/></svg>
+          <div class="text-left leading-none"><div class="text-xs font-semibold">GET IT ON</div><div class="text-lg font-black">Google Play</div></div>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATOR -->
+<section id="locator" class="py-20 bg-white">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12 scroll-reveal">
+      <h2 class="text-4xl md:text-5xl font-black text-yellow-900 mb-6">Find Your Flame</h2>
+      <div class="flex max-w-lg mx-auto shadow-lg rounded-full overflow-hidden border-2 border-gray-200 focus-within:border-yellow-400 transition-colors">
+        <input type="text" id="zip-input" placeholder="Enter ZIP or City" class="w-full px-6 py-4 text-lg font-bold text-gray-800 outline-none">
+        <button id="zip-btn" class="bg-yellow-400 text-yellow-900 font-black px-8 hover:bg-yellow-300 transition-colors">Find</button>
+      </div>
+    </div>
+    <div class="space-y-4">
+      <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:shadow-md transition-shadow scroll-reveal">
+        <div>
+          <h3 class="text-xl font-black text-yellow-900 mb-1">Burger King — Downtown</h3>
+          <p class="text-gray-600 font-bold mb-2">123 Flame Blvd, Food City, FC 12345</p>
+          <p class="text-red-600 font-extrabold text-sm mb-3">Open until 11PM</p>
+          <div class="flex flex-wrap gap-2 text-xs font-bold text-yellow-900">
+            <span class="bg-gray-200 px-2 py-1 rounded">Drive-Thru ✓</span>
+            <span class="bg-gray-200 px-2 py-1 rounded">Delivery ✓</span>
+            <span class="bg-gray-200 px-2 py-1 rounded">Dine-In ✓</span>
+          </div>
+        </div>
+        <button class="w-full md:w-auto border-2 border-yellow-900 text-yellow-900 font-black px-6 py-2 rounded-full hover:bg-yellow-900 hover:text-white transition-colors">Get Directions</button>
+      </div>
+      <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:shadow-md transition-shadow scroll-reveal stagger-1">
+        <div>
+          <h3 class="text-xl font-black text-yellow-900 mb-1">Burger King — Westside Mall</h3>
+          <p class="text-gray-600 font-bold mb-2">456 Retail Way, Food City, FC 12346</p>
+          <p class="text-red-600 font-extrabold text-sm mb-3">Open until 10PM</p>
+          <div class="flex flex-wrap gap-2 text-xs font-bold text-yellow-900">
+            <span class="bg-gray-200 px-2 py-1 rounded">Dine-In ✓</span>
+            <span class="bg-gray-200 px-2 py-1 rounded">Takeout ✓</span>
+          </div>
+        </div>
+        <button class="w-full md:w-auto border-2 border-yellow-900 text-yellow-900 font-black px-6 py-2 rounded-full hover:bg-yellow-900 hover:text-white transition-colors">Get Directions</button>
+      </div>
+      <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4 hover:shadow-md transition-shadow scroll-reveal stagger-2">
+        <div>
+          <h3 class="text-xl font-black text-yellow-900 mb-1">Burger King — Highway 99</h3>
+          <p class="text-gray-600 font-bold mb-2">789 Interstate Dr, Food City, FC 12349</p>
+          <p class="text-red-600 font-extrabold text-sm mb-3">Open 24 Hours</p>
+          <div class="flex flex-wrap gap-2 text-xs font-bold text-yellow-900">
+            <span class="bg-gray-200 px-2 py-1 rounded">Drive-Thru ✓</span>
+            <span class="bg-gray-200 px-2 py-1 rounded">Breakfast ✓</span>
+          </div>
+        </div>
+        <button class="w-full md:w-auto border-2 border-yellow-900 text-yellow-900 font-black px-6 py-2 rounded-full hover:bg-yellow-900 hover:text-white transition-colors">Get Directions</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="py-20 bg-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-4xl md:text-5xl font-black text-yellow-900 text-center mb-12 scroll-reveal">The People Have Spoken 🔥</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+      <div class="bg-white p-8 rounded-3xl shadow-md scroll-reveal stagger-1">
+        <div class="text-yellow-400 text-2xl mb-4">★★★★★</div>
+        <p class="text-xl font-black text-gray-800 mb-6 italic">"Nothing beats the flame-grilled taste. Literally the best fast-food burger period."</p>
+        <div class="font-bold text-gray-500">— Mike T., Chicago</div>
+      </div>
+      <div class="bg-white p-8 rounded-3xl shadow-md scroll-reveal stagger-2">
+        <div class="text-yellow-400 text-2xl mb-4">★★★★★</div>
+        <p class="text-xl font-black text-gray-800 mb-6 italic">"The app deals are insane. I saved $10 yesterday just by using the app to order."</p>
+        <div class="font-bold text-gray-500">— Sarah J., Austin</div>
+      </div>
+      <div class="bg-white p-8 rounded-3xl shadow-md scroll-reveal stagger-3">
+        <div class="text-yellow-400 text-2xl mb-4">★★★★★</div>
+        <p class="text-xl font-black text-gray-800 mb-6 italic">"Fries are always hot, Whopper is always fresh. My go-to lunch spot every Friday."</p>
+        <div class="font-bold text-gray-500">— David L., Miami</div>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="aspect-square rounded-2xl overflow-hidden scroll-reveal stagger-1"><img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=400&q=80" alt="Food" class="w-full h-full object-cover hover:scale-110 transition-transform duration-300"></div>
+      <div class="aspect-square rounded-2xl overflow-hidden scroll-reveal stagger-2"><img src="https://images.unsplash.com/photo-1594212848116-b8db20f171bc?auto=format&fit=crop&w=400&q=80" alt="Food" class="w-full h-full object-cover hover:scale-110 transition-transform duration-300"></div>
+      <div class="aspect-square rounded-2xl overflow-hidden scroll-reveal stagger-3"><img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?auto=format&fit=crop&w=400&q=80" alt="Food" class="w-full h-full object-cover hover:scale-110 transition-transform duration-300"></div>
+      <div class="aspect-square rounded-2xl overflow-hidden scroll-reveal stagger-1"><img src="https://images.unsplash.com/photo-1610440042657-612c34d95e9f?auto=format&fit=crop&w=400&q=80" alt="Food" class="w-full h-full object-cover hover:scale-110 transition-transform duration-300"></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-black text-white pt-16 pb-24 md:pb-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+      <div>
+        <div class="flex flex-col leading-none mb-4">
+          <span class="font-black text-3xl tracking-tighter text-red-600">BURGER</span>
+          <span class="font-black text-3xl tracking-tighter text-yellow-400">KING</span>
+        </div>
+        <p class="text-gray-400 font-bold mb-6">Flame-grilled since 1953.</p>
+        <a href="#menu" class="inline-block bg-yellow-400 text-yellow-900 font-black px-6 py-3 rounded-full hover:bg-yellow-300 transition-colors">Order Now</a>
+      </div>
+      <div>
+        <h4 class="text-xl font-black mb-4">Menu</h4>
+        <ul class="space-y-2 font-bold text-gray-400">
+          <li><a href="#" class="hover:text-white transition-colors">Burgers</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Chicken</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Sides</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Value Menu</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-xl font-black mb-4">Company</h4>
+        <ul class="space-y-2 font-bold text-gray-400">
+          <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Franchising</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Press</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-xl font-black mb-4">Stay Hungry</h4>
+        <p class="text-sm font-bold text-gray-400 mb-4">Get the freshest deals directly to your inbox.</p>
+        <div class="flex mb-6">
+          <input type="email" placeholder="Email Address" class="w-full px-4 py-2 rounded-l-md text-yellow-900 font-bold outline-none">
+          <button class="bg-red-700 px-4 py-2 rounded-r-md font-black hover:bg-red-600 transition-colors">Join</button>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm font-bold text-gray-500">
+      <p>© 2025 Burger King Corporation. All Rights Reserved.</p>
+      <div class="mt-4 md:mt-0 space-x-4">
+        <a href="#" class="hover:text-white transition-colors">Privacy</a>
+        <a href="#" class="hover:text-white transition-colors">Terms</a>
+        <a href="#" class="hover:text-white transition-colors">Allergen/Nutrition</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- MOBILE STICKY CTA -->
+<div class="md:hidden fixed bottom-0 left-0 w-full z-50 bg-white border-t border-gray-200 p-4 shadow-lg">
+  <a href="#menu" class="block w-full bg-yellow-400 text-yellow-900 font-black text-center text-xl py-3 rounded-full hover:bg-yellow-300 active:scale-95 transition-all">
+    🔥 Order Now
+  </a>
+</div>
+
+<script>
+  // Banner dismiss
+  document.getElementById('close-banner').addEventListener('click', function() {
+    document.getElementById('promo-banner').style.display = 'none';
+  });
+
+  // Sticky nav
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 50) {
+      nav.style.background = '#502314';
+      nav.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)';
+    } else {
+      nav.style.background = 'transparent';
+      nav.style.boxShadow = 'none';
+    }
+  });
+
+  // Mobile menu
+  document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+  });
+  document.querySelectorAll('.mobile-link').forEach(l => l.addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.add('hidden');
+  }));
+
+  // Countdown timer
+  function updateTimer() {
+    const now = new Date();
+    const midnight = new Date(now);
+    midnight.setHours(24, 0, 0, 0);
+    const diff = midnight - now;
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('t-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('t-minutes').textContent = String(m).padStart(2,'0');
+    document.getElementById('t-seconds').textContent = String(s).padStart(2,'0');
+  }
+  setInterval(updateTimer, 1000);
+  updateTimer();
+
+  // Menu tabs
+  document.querySelectorAll('.menu-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.menu-tab').forEach(t => {
+        t.classList.remove('border-yellow-400','text-yellow-900');
+        t.classList.add('border-transparent','text-gray-500');
+      });
+      tab.classList.add('border-yellow-400','text-yellow-900');
+      tab.classList.remove('border-transparent','text-gray-500');
+      const mc = document.getElementById('menu-container');
+      mc.style.opacity = '0';
+      setTimeout(() => { mc.style.opacity = '1'; mc.style.transition = 'opacity 0.3s'; }, 50);
+    });
+  });
+
+  // ZIP toast
+  document.getElementById('zip-btn').addEventListener('click', () => {
+    const val = document.getElementById('zip-input').value.trim();
+    if (!val) return;
+    const old = document.getElementById('toast');
+    if (old) old.remove();
+    const t = document.createElement('div');
+    t.id = 'toast';
+    t.style.cssText = 'position:fixed;bottom:6rem;left:50%;transform:translateX(-50%);background:#1a0a04;color:#fff;font-weight:700;padding:12px 24px;border-radius:9999px;z-index:100;box-shadow:0 8px 25px rgba(0,0,0,0.3)';
+    t.textContent = 'Finding locations near ' + val + '...';
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 3000);
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
